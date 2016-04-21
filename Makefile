@@ -1,2 +1,2 @@
 push:
-	rsync -avz ./ --exclude '.git/' eferrer.info:~/public_html
+	rsync -avz --no-perms --no-owner --no-group ./ --exclude '.git/' eferrer.info:~/public_html
