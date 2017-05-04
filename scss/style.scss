@@ -1,0 +1,229 @@
+@import '../css/normalize.css';
+@import '../css/main.css';
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900,500,300);
+
+// colors
+$white: #eee;
+$dark_gray: #333;
+$light_gray: #ccc;
+
+$blue: #30A9EC;
+
+// other vars
+$inline_element_padding: .35em;
+$box_element_padding: 1em;
+$border_radius: 6px;
+
+.clearfix:before,
+.clearfix:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+html, body {
+	height: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.content-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+	margin-bottom: -64px;
+}
+
+.content-wrap:after {
+  content: "";
+  display: block;
+}
+
+.site-footer, .content-wrap:after {
+  /* .push must be the same height as footer */
+	height: 64px;
+}
+
+.site-footer {
+  color: $dark_gray;
+  font-size:11px;
+  text-align: center;
+  padding-top: 2em;
+  background: #EFEFEF;
+}
+
+.hide { display: none; }
+
+header {
+  padding-top: 2.5em;
+  margin-bottom: 1.5em;
+  h1 {
+    color: $white;
+    font-size: 3.5em;
+    text-align: center;
+    margin: 0 auto;
+    font-family: 'Pacifico', cursive, serif;
+  }
+}
+//basic grid
+.percent50 {
+  width: 100%;
+  float: left; overflow: hidden;
+  @media (min-width: 800px) {
+    width: 50%;
+  }
+}
+
+.container {
+  padding: $box_element_padding;
+  @extend .clearfix;
+  max-width: 960px;
+  margin: 0 auto;
+  .lead-text {
+    color: $white;
+    font-size: 120%;
+    max-width: 700px;
+    margin: 3em auto 4em;
+  }
+  .lead-text, h2, h3 { font-family: 'Raleway', Arial, sans-serif; }
+  h2 {  margin: 3em 0em 2em; text-align: center; font-style: italic;}
+  img { margin: 0 auto; width: 100%; max-width: 350px; display: block;}
+}
+
+.header-wrap {
+  background: url("../rainy-wallpaper.jpg");
+  background-size: cover;
+  box-shadow: inset 0px 0px 0 2000px rgba(0,0,0,0.75);
+}
+
+// Responsive Form
+form {
+  margin-top: 2em;
+  input, select{
+    border-radius: $border_radius;
+    border: 1px solid $light_gray;
+    padding: .25em;
+    background-color: #fff;
+  }
+  h4, span { text-align: center; width: 100%; display: inline-block;}
+  input.button {
+    border: 1px solid $dark_gray;
+    margin-top:.5em;
+    background-color: $blue;
+    padding: .25em 2em;
+    font-weight: bold;
+    font-family: 'Pacifico', cursive, serif;
+    font-size: 150%;
+    color: $white;
+  }
+
+  .form-header h3{
+    text-align: center;
+  }
+
+  .form-step > div {
+    clear: both;
+    overflow: hidden;
+    padding: 1px;
+    margin: 0 0 20px 0;
+  }
+  .form-step > div > fieldset > div > div {
+    margin: 0 0 5px 0;
+  }
+  .form-step > div > label {
+    padding: .25em;
+  	width: 31%;
+    float: left;
+    padding-right: 10px;
+  }
+  .form-step > div > div,
+  .form-step > div > fieldset > div {
+    width: 65%;
+    float: right;
+  }
+  .form-step > div > fieldset label {
+  	font-size: 90%;
+  }
+  fieldset {
+  	border: 0;
+    padding: 0;
+  }
+
+  input[type=text],
+  input[type=email],
+  input[type=url],
+  input[type=password],
+  textarea {
+  	width: 100%;
+  }
+  input[type=text],
+  input[type=email],
+  input[type=url],
+  input[type=password] {
+    width: 65%;
+  }
+  input[type=text]:focus,
+  input[type=email]:focus,
+  input[type=url]:focus,
+  input[type=password]:focus,
+  textarea:focus {
+    outline: 0;
+    border-color: $blue;
+  }
+
+  @media (max-width: 600px) {
+    .form-step > div {
+      margin: 0 0 15px 0;
+    }
+    .form-step > div > label {
+  	  width: 100%;
+      float: none;
+      margin: 0 0 5px 0;
+    }
+    .form-step > div > div,
+    .form-step > div > fieldset > div {
+      width: 100%;
+      float: none;
+    }
+    input[type=text],
+    input[type=email],
+    input[type=url],
+    input[type=password],
+    textarea,
+    select {
+      width: 98%;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+    select.small {
+      width: 33%;
+    }
+  }
+  @media (min-width: 1200px) {
+    .form-step > div > label {
+    	text-align: right;
+    }
+  }
+}
+//animations
+.form-step {  position: relative; }
+.form-step.show {
+  right: 400px;
+  animation: slide 0.5s forwards;
+}
+
+@keyframes slide {
+    100% { right: 0; }
+}

@@ -85,7 +85,6 @@ a {
         margin-top: 4.8em;
         margin-right: 3em;
     }
-    .cf;
 }
 
 /* Type */
@@ -179,7 +178,7 @@ small, .meta {
 }
 
 .bullet {
-    list-style: square;
+    list-style: disc;
     margin-left: 1em;
 }
 .contact {
@@ -219,4 +218,11 @@ section.technical_skills {
     }
     p:first-child em { color: #aaa; }
 }
-.notable_projects { margin-top: 1em;}
+.notable_projects { 
+  margin-top: 1em;
+}
+.company {
+  .notable_projects, ul { 
+    margin-left: 1em;
+  }
+}
