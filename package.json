@@ -2,17 +2,14 @@
   "name": "eferrer.info",
   "version": "0.1.0",
   "author": "Eddie Ferrer",
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "~0.5.0",
-    "grunt-contrib-watch": "~0.4.4",
-    "grunt-sass": "^1.0.0"
-  },
+  "devDependencies": {},
   "main": "gruntfile.js",
   "dependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^1.0.3",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.0.1",
+    "load-grunt-tasks": "^4.0.0",
+    "node-sass": "^4.9.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
