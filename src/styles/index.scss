@@ -6,6 +6,7 @@ $turquoise3:darken($turquoise2, 15%);
 $backgroundcolor1: #dcdbe1;
 $backgroundcolor2: #d8d3d0;
 $link-color: #9cd2a1;
+$gray: #717171;
 
 * {
   box-sizing: border-box;
@@ -152,5 +153,6 @@ main {
 footer {
   text-align: center;
   margin-top: 1rem;
-  color: $turquoise2;
+  color: $gray;
+  font-size: 0.95rem;
 }
