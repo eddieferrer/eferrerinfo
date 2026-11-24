@@ -1,8 +1,10 @@
+@use 'sass:color';
+
 $white: #efefef;
 $black: #121212;
 $turquoise2: #476a71;
-$turquoise1: lighten($turquoise2, 15%);
-$turquoise3:darken($turquoise2, 15%);
+$turquoise1: color.adjust($turquoise2, $lightness: 15%);
+$turquoise3: color.adjust($turquoise2, $lightness: -15%);
 $backgroundcolor1: #dcdbe1;
 $backgroundcolor2: #d8d3d0;
 $link-color: #9cd2a1;
@@ -98,7 +100,7 @@ main {
   .hero {
     background-image:
       radial-gradient(circle, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.25) 90%),
-      url('../assets/images/hero_image.jpg');
+      url('/src/assets/images/hero_image.jpg');
     background-size: cover;
     height: 21rem;
     color: $black;
@@ -136,7 +138,7 @@ main {
   }
 
   a:hover {
-    color: lighten($link-color, 30%);
+    color: color.adjust($link-color, $lightness: 30%);
   }
 
   .icon {
