@@ -4,9 +4,6 @@ node_modules
 # production
 build
 
-# parity check output
-parity-report
-
 # misc
 .DS_Store
 npm-debug.log

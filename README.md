@@ -16,7 +16,6 @@ npm start          # dev server with hot reload
 npm run build      # production build into ./build
 npm run preview    # serve ./build locally
 npm run lint       # stylelint (SCSS) + ESLint
-npm run parity     # compare ./build against the live site (see below)
 ```
 
 ## Project layout
@@ -33,7 +32,6 @@ public/               copied as-is to the site root
   favicons, site.webmanifest
 vite.config.js        build config
 netlify.toml          Netlify build command, publish dir, Node version
-scripts/parity.js     parity check against production
 ```
 
 ## Build output
@@ -61,21 +59,3 @@ The beacon token isn't a secret, because it's visible in the page source.
 
 Netlify builds every push using `netlify.toml` (`npm run build`, publishing `build/`). Pull requests get a deploy preview.
 
-## Parity check
-
-`npm run parity` checks that a build behaves like the production site:
-
-- **URLs:** every page, stylesheet, script and static asset returns 200, and static files are byte-identical.
-- **HTML:** the markup is identical apart from the script hash and the Cloudflare beacon.
-- **CSS:** every parsed declaration matches, ignoring vendor prefixes and formatting.
-- **Behavior:** the footer shows the current year, no Google Analytics requests are made, and the Cloudflare beacon loads.
-- **Screenshots:** full-page screenshots at 375, 700, 701 and 1280px are pixel-identical (diffs are written to `parity-report/`).
-
-Analytics requests are blocked during the check, so it never records hits.
-
-```sh
-npm run build && npm run parity                      # local build vs. production
-npm run parity -- https://deploy-preview-N--<site>.netlify.app  # also checks content types and redirects
-```
-
-The first run needs a browser: `npx playwright install chromium`.
