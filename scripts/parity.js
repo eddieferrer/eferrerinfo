@@ -42,6 +42,9 @@ const EXPECTED_MISSING = ['/bundle.css.map']; // Vite does not emit CSS source m
 const BEACON_TAG =
   /<script type="module" src="https:\/\/static\.cloudflareinsights\.com\/beacon\.min\.js" data-cf-beacon='[^']*'><\/script>/;
 const ANALYTICS = [/google-analytics\.com/, /cloudflareinsights\.com/];
+// Netlify appends a collaboration toolbar to Deploy Preview URLs only (never production).
+const NETLIFY_PREVIEW_DRAWER = /<div data-netlify-deploy-id="[^"]*"[^>]*>[\s\S]*?<\/div>\s*$/;
+const NETLIFY_PREVIEW_SCRIPT = /\/\.netlify\/scripts\/cdp/;
 
 const results = [];
 function check(name, ok, detail = '') {
@@ -136,7 +139,11 @@ function checkHtml(liveHtml, candHtml) {
   console.log('\n# HTML');
   check('Cloudflare Web Analytics beacon present', BEACON_TAG.test(candHtml));
   check('No Google Analytics reference', !/google-analytics|UA-\d+/.test(candHtml));
-  const norm = (html) => html.replace(BEACON_TAG, '').replace(/js\/app\.[\w-]+\.js/g, 'js/app.[hash].js');
+  const norm = (html) =>
+    html
+      .replace(NETLIFY_PREVIEW_DRAWER, '')
+      .replace(BEACON_TAG, '')
+      .replace(/js\/app\.[\w-]+\.js/g, 'js/app.[hash].js');
   const [l, c] = [norm(liveHtml), norm(candHtml)];
   check('Markup identical (ignoring JS hash and beacon)', l === c, firstDifference(l, c));
 }
@@ -199,6 +206,8 @@ async function checkBrowser(cand) {
     const context = await browser.newContext();
     // Never send analytics hits from a test run.
     await context.route((url) => ANALYTICS.some((re) => re.test(url.href)), (route) => route.abort());
+    // Keep the Deploy Preview toolbar out of screenshots.
+    await context.route((url) => NETLIFY_PREVIEW_SCRIPT.test(url.pathname), (route) => route.abort());
 
     const live = await openPage(context, LIVE + '/');
     const next = await openPage(context, cand + '/');
